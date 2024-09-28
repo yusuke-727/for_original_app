@@ -2,9 +2,9 @@ class EventsController < ApplicationController
   before_action :set_event, only: [:show, :edit, :update, :destroy]
 
   def index
-    @events = Event.all
+    @events = Event.order(scheduled_date: :desc).page(params[:page]).per(10)
   end
-
+  
   def show
     @event = Event.find(params[:id])
   end
