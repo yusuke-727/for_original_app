@@ -15,11 +15,15 @@
       <p id="notice"><%= notice %></p>
     <% end %>
 
+    <% if flash %>
+      <p id="alert"><%= notice %></p>
+    <% end %>
+
     <header>
       <nav>
         <ul>
         <li>
-        <%= link_to 'Events Index', events_path, id: 'events-index' %>
+        <%= link_to t('views.navigation.events_index'), events_path, id: 'events-index' %>
         </li>
         </ul>
       </nav>

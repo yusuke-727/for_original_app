@@ -1,0 +1,63 @@
+ja:
+  views:
+    navigation:
+      events_index: "イベント一覧"
+      new_event: "イベントを登録する"
+    events:
+      index:
+        title: "イベント一覧ページ"
+        table_headers:
+          title: "タイトル"
+          content: "内容"
+          scheduled_date: "予定日時"
+          created_at: "作成日時"
+        actions:
+          show: "詳細"
+          edit: "編集"
+          destroy: "削除"
+          confirm_destroy: "本当に削除してもよろしいですか？"
+      new:
+        title: "イベント登録ページ"
+        form:
+          title: "タイトル"
+          content: "内容"
+          scheduled_date: "予定日時"
+          create: "登録する"
+          back: "戻る"
+      show:
+        title: "イベント詳細ページ"
+        attributes:
+          title: "タイトル"
+          content: "内容"
+          scheduled_date: "予定日時"          
+          created_at: "作成日時"
+      edit:
+        title: "イベント編集ページ"
+        form:
+          title: "タイトル"
+          content: "内容"
+          scheduled_date: "予定日時"
+          update: "更新する"
+          back: "戻る"
+      flash:
+        create: "イベントを登録しました"
+        update: "イベントを更新しました"
+        destroy: "イベントを削除しました"    
+
+    pagination:
+      truncate: '…'
+
+  activerecord:
+    errors:
+      models:
+        event:
+          attributes:
+            title:
+              blank: "タイトルを入力してください"
+            content:
+              blank: "内容を入力してください"
+  date:
+    order:
+      - :year
+      - :month
+      - :day

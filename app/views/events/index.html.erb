@@ -1,12 +1,12 @@
-<h1>Events Index Page</h1>
+<h1><%= t('views.events.index.title') %></h1>
 
 <table>
   <thead>
     <tr>
-      <th>Title</th>
-      <th>Content</th>
-      <th>Scheduled date</th>
-      <th>Created_at</th>
+      <th><%= t('views.events.index.table_headers.title') %></th>
+      <th><%= t('views.events.index.table_headers.content') %></th>
+      <th><%= t('views.events.index.table_headers.scheduled_date') %></th>
+      <th><%= t('views.events.index.table_headers.created_at') %></th>
       <th colspan="4"></th>
     </tr>
   </thead>
@@ -16,11 +16,11 @@
       <tr>
         <td><%= event.title %></td>
         <td><%= event.content %></td>
-        <td><%= event.scheduled_date.strftime("%Y-%m-%d %H:%M") %></td>
-        <td><%= event.created_at.strftime("%Y-%m-%d %H:%M") %></td>
-        <td><%= link_to 'Show', event_path(event), class: 'show-event' %></td>
-        <td><%= link_to 'Edit', edit_event_path(event), class: 'edit-event' %></td>
-        <td><%= link_to 'Destroy', event_path(event), method: :delete, data: { confirm: 'Are you sure?' }, class: 'destroy-event' %></td>
+        <td><%= event.scheduled_date.strftime("%Y/%m/%d %H:%M") %></td>
+        <td><%= event.created_at.strftime("%Y/%m/%d %H:%M") %></td>
+        <td><%= link_to t('views.events.index.actions.show'), event_path(event), class: 'show-event' %></td>
+        <td><%= link_to t('views.events.index.actions.edit'), edit_event_path(event), class: 'edit-event' %></td>
+        <td><%= link_to t('views.events.index.actions.destroy'), event_path(event), method: :delete, data: { confirm: 'Are you sure?' }, class: 'destroy-event' %></td>
       </tr>
     <% end %>
   </tbody>
@@ -28,4 +28,5 @@
 
 <br>
 
-<%= link_to 'New Event', new_event_path %>
+<%= link_to t('views.navigation.new_event'), new_event_path %>
+<%= paginate @events %>
