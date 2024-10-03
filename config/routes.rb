@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  root 'events#index'
+  root 'pages#home' 
+  devise_for :users
+  resources :users
   resources :events
 
   if Rails.env.development?

@@ -1,0 +1,7 @@
+<h1>出欠チェッカー</h1>
+
+<% if user_signed_in? %>
+  <p>Logged in as <%= current_user.email %></p>
+  <%= link_to 'イベント一覧ページ', events_path %>
+
+<% end %>

@@ -1,6 +1,7 @@
 class EventsController < ApplicationController
   before_action :set_event, only: [:show, :edit, :update, :destroy]
-
+  before_action :authenticate_user!, except: [:index]
+  
   def index
     @events = Event.order(scheduled_date: :desc).page(params[:page]).per(10)
   end
