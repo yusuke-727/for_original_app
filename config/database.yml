@@ -84,3 +84,4 @@ production:
   database: answer_checker_production
   username: answer_checker
   password: <%= ENV['ANSWER_CHECKER_DATABASE_PASSWORD'] %>
+  url: <%= ENV['DATABASE_URL'] %>
