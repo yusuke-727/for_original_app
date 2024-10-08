@@ -11,12 +11,12 @@
   </head>
 
   <body>
-    <% if notice %>
-      <p id="notice"><%= notice %></p>
+    <% if flash[:notice] %>
+      <p id="notice" class="flash notice"><%= flash[:notice] %></p>
     <% end %>
 
-    <% if flash %>
-      <p id="alert"><%= notice %></p>
+    <% if flash[:alert] %>
+      <p id="alert" class="flash alert"><%= flash[:alert] %></p>
     <% end %>
 
       <nav>

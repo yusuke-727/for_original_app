@@ -56,6 +56,15 @@ ja:
               blank: "タイトルを入力してください"
             content:
               blank: "内容を入力してください"
+        event_user:
+          attributes:
+            event: "無効なイベントです"
+            user: "無効なユーザーです"
+            answer:
+              inclusion: "無効な回答です。選択肢から選んでください。"
+            event_id:
+              blank: "イベントidがblankです。"
+  
   date:
     order:
       - :year
