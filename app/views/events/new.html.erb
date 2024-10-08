@@ -1,18 +1,16 @@
 <h1><%= t('views.events.new.title') %></h1>
 
 <%= form_with model: @event, local: true do |form| %>
-    <% if @event.errors.any? %>
+  <% if @event.errors.any? %>
     <div id="error_explanation">
-    <h2><%= pluralize(@event.errors.count, "error") %> <%= t('errors.messages.prohibited_this', count: @event.errors.count) %>:</h2>
+      <h2><%= pluralize(@event.errors.count, "error") %> <%= t('errors.messages.prohibited_this', count: @event.errors.count) %>:</h2>
       <ul>
-       <% @event.errors.each do |attribute, message| %>
+        <% @event.errors.each do |attribute, message| %>
           <li><%= message %></li>
         <% end %>
       </ul>
     </div>
   <% end %>
-
-
 
   <div class="field">
     <%= form.label :title, t('views.events.new.form.title') %><br>
@@ -26,7 +24,12 @@
 
   <div class="field">
     <%= form.label :scheduled_date, t('views.events.new.form.scheduled_date') %>
-    <%= form.datetime_select :scheduled_date, use_month_numbers: true  %>
+    <%= form.datetime_select :scheduled_date, use_month_numbers: true %>
+  </div>
+
+  <div class="field">
+    <%= form.label :user_ids, "ユーザー選択" %><br>
+    <%= form.collection_check_boxes :user_ids, User.all, :id, :name %>
   </div>
 
   <div class="actions">
@@ -34,4 +37,4 @@
   </div>
 <% end %>
 
-<%= link_to t('views.events.new.form.back'), events_path,  id: 'back' %>
+<%= link_to t('views.events.new.form.back'), events_path, id: 'back' %>

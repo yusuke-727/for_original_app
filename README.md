@@ -42,7 +42,7 @@ Things you may want to cover:
   https://docs.google.com/spreadsheets/d/1LeZQWF8jZyCMKrrp4xBm3D3zKoprHD3h_SLkJdzcWp8/edit?usp=sharing
 
 * ER図
-![ER図](./images/ER図.png)
+![ER図](./images/ER図2.png)
 
 * 画面遷移図
 ![画面遷移図](./images/画面遷移図.png)

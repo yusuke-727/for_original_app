@@ -1,0 +1,26 @@
+<h2>回答ページ</h2>
+
+<p>
+  <strong>タイトル:</strong> <%= @event.title %>
+</p>
+
+<p>
+  <strong>予定日:</strong> <%= @event.scheduled_date.strftime("%Y/%m/%d %H:%M:%S") %>
+</p>
+
+<p>
+  <strong>ユーザ:</strong> <%= @user_event.user.name %>
+</p>
+
+<%= form_with(model: @user_event, url: submit_answer_event_path(@event), method: :patch, local: true) do |f| %>
+  <div class="field">
+    <%= f.label :answer, "回答" %><br>
+    <%= f.radio_button :answer, '参加' %> 参加<br>
+    <%= f.radio_button :answer, '不参加' %> 不参加<br>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "更新" %>
+    <%= link_to '戻る', event_path(@event) %>
+  </div>
+<% end %>
