@@ -29,7 +29,7 @@ ja:
         attributes:
           title: "タイトル"
           content: "内容"
-          scheduled_date: "予定日時"          
+          scheduled_date: "予定日時"
           created_at: "作成日時"
       edit:
         title: "イベント編集ページ"
@@ -42,12 +42,20 @@ ja:
       flash:
         create: "イベントを登録しました"
         update: "イベントを更新しました"
-        destroy: "イベントを削除しました"    
+        destroy: "イベントを削除しました"
 
     pagination:
       truncate: '…'
 
   activerecord:
+    models:
+      user: "ユーザー"
+    attributes:
+      user:
+        name: "名前"
+        email: "メールアドレス"
+        password: "パスワード"
+        password_confirmation: "パスワード（確認用）"
     errors:
       models:
         event:
@@ -63,8 +71,17 @@ ja:
             answer:
               inclusion: "無効な回答です。選択肢から選んでください。"
             event_id:
-              blank: "イベントidがblankです。"
-  
+              blank: "イベントIDがblankです。"
+        user:
+          attributes:
+            name:
+              blank: "名前を入力してください"
+            email:
+              blank: "メールアドレスを入力してください"
+            password:
+              blank: "パスワードを入力してください"
+              too_short: "パスワードは%{count}文字以上で入力してください"
+
   date:
     order:
       - :year
