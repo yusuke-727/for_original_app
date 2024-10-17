@@ -1,6 +1,20 @@
-<h1><%= t('views.events.index.title') %></h1>
+<div class="container">
+  <h1><%= t('views.events.index.title') %></h1>
 
-<table>
+   <%= form_with url: events_path, method: :get, scope: :search, local: true do %>
+    <div class="form-row">
+      <div class="form-group col-md-4">
+        <%= label_tag :title, t('views.events.index.search.title') %>
+        <%= text_field_tag 'search[title]', params.dig(:search, :title), class: "form-control" %>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <%= submit_tag t('views.events.index.search.submit'), id: 'search_event', class: "btn btn-outline-success" %>
+    </div>
+<% end %>
+
+<table class="table table-striped table-bordered">
   <thead>
     <tr>
       <th><%= t('views.events.index.table_headers.title') %></th>
@@ -13,7 +27,7 @@
 
   <tbody>
     <% @events.each do |event| %>
-      <tr>
+      <tr class="event_row">
         <td><%= event.title %></td>
         <td><%= event.content %></td>
         <td><%= event.scheduled_date.strftime("%Y/%m/%d %H:%M") %></td>
@@ -29,3 +43,4 @@
 <br>
 
 <%= paginate @events %>
+</div>

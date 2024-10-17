@@ -1,43 +1,112 @@
 <!DOCTYPE html>
-<html>
+<html lang="ja">
   <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
     <title>AnswerChecker</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
+
+    <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+    }
+
+      .container {
+        flex: 1;
+      }
+
+      footer {
+        background-color: #222;
+        padding: 20px;
+        text-align: center;
+        color: white;
+      }
+    
+      .footer-group-div {
+        margin-bottom: 20px;
+      }
+    
+      .footer-group-title-p {
+        font-weight: bold;
+        margin-bottom: 10px;
+      }
+    
+      .footer-group-ul {
+        list-style-type: none;
+        padding: 0;
+      }
+    
+      .footer-group-ul a {
+        display: block;
+        color: white;
+        text-decoration: none;
+        margin: 5px 0;
+      }
+    
+      .footer-group-ul a:hover {
+        text-decoration: underline;
+      }
+    </style>
+    </head>
 
   <body>
-    <% if flash[:notice] %>
-      <p id="notice" class="flash notice"><%= flash[:notice] %></p>
-    <% end %>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
-    <% if flash[:alert] %>
-      <p id="alert" class="flash alert"><%= flash[:alert] %></p>
-    <% end %>
-
-      <nav>
-        <ul>
-        <% if user_signed_in? %>
-        <% if current_user.is_admin? %>
-          <li><%= link_to t('views.navigation.new_event'), new_event_path %></li>
-          <li><%= link_to "ユーザ一覧", admin_users_path %></li>
-        <% end %>
-
-          <li><%= link_to t('views.navigation.events_index'), events_path, id: 'events-index' %></li>
-          <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></li>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+      <a class="navbar-brand" href="<%= root_path %>">出欠チェッカー</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav ml-auto">
+          <% if user_signed_in? %>
+            <% if current_user.is_admin? %>
+              <%= link_to t('views.navigation.new_event'), new_event_path, class: 'nav-item nav-link', id: 'new-event' %>
+              <%= link_to "ユーザ一覧", users_path, class: 'nav-item nav-link', id: 'users-index' %>
+            <% end %>
+            <%= link_to t('views.navigation.events_index'), events_path, class: 'nav-item nav-link', id: 'events-index' %>
+            <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: 'nav-item nav-link', id: 'sign-out' %>
           <% else %>
-          <li><%= link_to "新規登録", new_user_registration_path %></li>
-          <li><%= link_to "ログイン", new_user_session_path %></li>
-        <% end %>
-        
-        </ul>
-      </nav>
-    
-    
-    <%= yield %>
+            <%= link_to "新規登録", new_user_registration_path, class: 'nav-item nav-link', id: 'add-user' %>
+            <%= link_to "ログイン", new_user_session_path, class: 'nav-item nav-link', id: 'sign-in' %>
+          <% end %>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container mt-5 pt-5">
+      <p class="notice"><%= notice %></p>
+      <p class="alert"><%= alert %></p>
+      <%= yield %>
+    </div>
+
+    <footer class="footer mt-auto py-3 bg-dark">
+      <div class="footer-group-div footer-chouseisan-div">
+        <p class="footer-group-title-p">出欠チェッカーについて</p>
+          <ul class="footer-group-ul">
+            <li><a href="#">お知らせ</a></li>
+            <li><a href="#">お問い合わせ・ご要望</a></li>
+            <li><a href="#">利用規約</a></li>
+            <li><a href="#">プライバシーポリシー</a></li>
+            <li><a href="#">広告掲載について</a></li>
+          </ul>
+      </div>
+    </footer>
   </body>
 </html>

@@ -1,42 +1,48 @@
-<h1><%= t('views.events.show.title') %></h1>
+<div class="container">
+  <h1><%= t('views.events.show.title') %></h1>
 
-<p>
-  <strong><%= t('views.events.show.attributes.title') %>:</strong>
-  <%= @event.title %>
-</p>
-
-<p>
-  <strong><%= t('views.events.show.attributes.content') %></strong>
-  <%= @event.content %>
-</p>
-
-<p>
-  <strong><%= t('views.events.show.attributes.scheduled_date') %></strong>
-  <%= @event.scheduled_date.strftime("%Y/%m/%d %H:%M:%S") %>
-</p>
-
-<h2>参加者の回答状況</h2>
-
-<table>
-  <thead>
-    <tr>
-      <th>ユーザ名</th>
-      <th>回答状況</th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @event.users.each do |user| %>
+  <table class="table table-striped">
+    <thead>
       <tr>
-        <td><%= user.name %></td>
-        <td><%= user.event_users.find_by(event_id: @event.id)&.answer || "未回答" %></td>
-        <td>
-          <%= link_to '回答を変更する', answer_event_path(@event), method: :get %>
-        </td>
+        <th><%= t('views.events.show.attributes.title') %></th>
+        <th><%= @event.title %></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong><%= t('views.events.show.attributes.content') %></strong></td>
+        <td><%= @event.content %></td>
+      </tr>
+      <tr>
+        <td><strong><%= t('views.events.show.attributes.scheduled_date') %></strong></td>
+        <td><%= @event.scheduled_date.strftime("%Y/%m/%d %H:%M:%S") %></td>
+      </tr>
+    </tbody>
+  </table>
 
-<%= link_to t('views.events.index.actions.edit'), edit_event_path(@event), id: 'edit-event' %> |
-<%= link_to t('views.events.new.form.back'), events_path, id: 'back' %>
+  <h2>参加者の回答状況</h2>
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>ユーザ名</th>
+        <th>回答状況</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @event.users.each do |user| %>
+        <tr>
+          <td><%= user.name %></td>
+          <td><%= user.event_users.find_by(event_id: @event.id)&.answer || "未回答" %></td>
+          <td>
+            <%= link_to '回答を変更する', answer_event_path(@event), method: :get, class: 'btn btn-primary btn-sm' %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <%= link_to t('views.events.index.actions.edit'), edit_event_path(@event), id: 'edit-event', class: 'btn btn-primary' %> |
+  <%= link_to t('views.events.new.form.back'), events_path, id: 'back', class: 'btn btn-secondary' %>
+</div>

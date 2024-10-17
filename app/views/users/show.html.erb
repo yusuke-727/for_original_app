@@ -1,23 +1,23 @@
+<div class="container">
+  <h1>ユーザ詳細ページ</h1>
 
-<p>
-  <strong>Name:</strong>
-  <%= @user.name %>
-</p>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th><strong>名前:</strong> <%= @user.name %></th>
+      </tr>
+      <tr>
+        <th><strong>メールアドレス:</strong> <%= @user.email %></th>
+      </tr>
+      <tr>
+        <th><strong>パスワード:</strong> <%= @user.password %></th>
+      </tr>
+      <tr>
+        <th><strong>管理者権限:</strong> <%= @user.is_admin? ? 'あり' : 'なし' %></th>
+      </tr>
+    </thead>
+  </table>
 
-<p>
-  <strong>Email:</strong>
-  <%= @user.email %>
-</p>
-
-<p>
-  <strong>Password digest:</strong>
-  <%= @user.password_digest %>
-</p>
-
-<p>
-  <strong>Is admin:</strong>
-  <%= @user.is_admin %>
-</p>
-
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
+  <%= link_to '編集', edit_user_path(@user), id: 'edit', class: 'btn btn-primary' %> |
+  <%= link_to '戻る', users_path, id: 'back', class: 'btn btn-secondary' %>
+</div>

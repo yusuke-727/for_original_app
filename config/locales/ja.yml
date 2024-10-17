@@ -3,6 +3,9 @@ ja:
     navigation:
       events_index: "イベント一覧"
       new_event: "イベントを登録する"
+    users:
+      index:
+        title: "ユーザ一覧"
     events:
       index:
         title: "イベント一覧ページ"
@@ -16,6 +19,9 @@ ja:
           edit: "編集"
           destroy: "削除"
           confirm_destroy: "本当に削除してもよろしいですか？"
+        search:
+          title: "タイトル"
+          submit: "検索"
       new:
         title: "イベント登録ページ"
         form:
@@ -43,6 +49,7 @@ ja:
         create: "イベントを登録しました"
         update: "イベントを更新しました"
         destroy: "イベントを削除しました"
+      answer_title: "回答ページ"
 
     pagination:
       truncate: '…'
@@ -56,6 +63,7 @@ ja:
         email: "メールアドレス"
         password: "パスワード"
         password_confirmation: "パスワード（確認用）"
+        admin: "管理者"
     errors:
       models:
         event:
