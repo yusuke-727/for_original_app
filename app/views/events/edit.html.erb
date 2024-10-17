@@ -1,40 +1,49 @@
-<h1><%= t('views.events.edit.title') %></h1>
+<div class="container">
+  <h1><%= t('views.events.edit.title') %></h1>
 
-<%= form_with model: @event, local: true do |form| %>
-  <% if @event.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@event.errors.count, "error") %> prohibited this event from being saved:</h2>
-      <ul>
-        <% @event.errors.each do |attribute, message| %>
-          <li><%= message %></li>
+  <%= form_with model: @event, local: true do |form| %>
+    <% if @event.errors.any? %>
+      <div id="error_explanation" class="alert alert-danger">
+        <h2><%= pluralize(@event.errors.count, "error") %> prohibited this event from being saved:</h2>
+        <ul>
+          <% @event.errors.each do |attribute, message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="form-group">
+      <%= form.label :title, t('views.events.edit.form.title') %>
+      <%= form.text_field :title, class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :content, t('views.events.edit.form.content') %>
+      <%= form.text_area :content, class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :scheduled_date, t('views.events.edit.form.scheduled_date') %>
+      <%= form.datetime_select :scheduled_date, use_month_numbers: true, class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :user_ids, "ユーザー選択" %><br>
+      <div class="form-check">
+        <%= form.collection_check_boxes :user_ids, User.all, :id, :name do |checkbox| %>
+          <div class="form-check">
+            <%= checkbox.check_box(class: 'form-check-input') %>
+            <%= checkbox.label(class: 'form-check-label') %>
+          </div>
         <% end %>
-      </ul>
+      </div>
+    </div>
+
+    <div class="actions">
+      <%= form.submit t('views.events.edit.form.update'), id: 'update-event', class: "btn btn-primary" %>
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :title, t('views.events.edit.form.title') %>
-    <%= form.text_field :title %>
-  </div>
-
-  <div class="field">
-    <%= form.label :content, t('views.events.edit.form.content') %>
-    <%= form.text_area :content %>
-  </div>
-
-  <div class="field">
-    <%= form.label :scheduled_date, t('views.events.edit.form.scheduled_date') %>
-    <%= form.datetime_select :scheduled_date, use_month_numbers: true %>
-  </div>
-
-  <div class="field">
-    <%= form.label :user_ids, "ユーザー選択" %><br>
-    <%= form.collection_check_boxes :user_ids, User.all, :id, :name %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit t('views.events.edit.form.update'), id: 'update-event' %>
-  </div>
-<% end %>
-
-<%= link_to t('views.events.edit.form.back'), events_path, id: 'back' %>
+  <%= link_to t('views.events.edit.form.back'), events_path, id: 'back', class: "btn btn-secondary mt-3" %>
+</div>

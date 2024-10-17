@@ -1,6 +1,7 @@
 class EventsController < ApplicationController
   before_action :set_event, only: [:show, :edit, :update, :destroy, :answer, :submit_answer]
   before_action :authenticate_user!, except: [:index]
+  before_action :admin_check, only: [:new, :create, :edit, :update]
   
   def index
     @events = Event.order(scheduled_date: :desc).page(params[:page]).per(10)
@@ -23,13 +24,11 @@ class EventsController < ApplicationController
   def create
     @event = Event.new(event_params)
     if @event.save
-      # ユーザーをイベントに関連付ける処理
       params[:event][:user_ids].reject(&:blank?).each do |user_id|
         @event.event_users.create!(user_id: user_id)
       end
       redirect_to events_path, notice: "Event was successfully created."
     else
-      #binding.irb
       render :new
     end
   end
@@ -59,6 +58,7 @@ class EventsController < ApplicationController
   def answer
     @user_event = @event.event_users.find_by(user_id: current_user.id)
     @user = @user_event.user unless @user_event.nil?
+    debugger
   end
   
   def submit_answer
@@ -82,5 +82,12 @@ class EventsController < ApplicationController
   
   def answer_params
     params.require(:event_user).permit(:answer)
+  end
+
+  def admin_check
+    unless current_user.is_admin?
+      flash[:alert] = "管理者権限が必要です。"
+      redirect_to events_path
+    end
   end
 end

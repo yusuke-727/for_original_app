@@ -40,8 +40,8 @@ admin_user = User.create!(
 
 20.times do |i|
   event = Event.create!(
-    title: "会議#{i + 1}",          # タイトル
-    content: "会議#{i + 1}の内容",  # 内容
-    scheduled_date: Time.now + i.days,  # 予定日時（現在時刻からi日後） 
+    title: "会議#{i + 1}",         
+    content: "会議#{i + 1}の内容",  
+    scheduled_date: Time.now + i.days,  
     )
 end

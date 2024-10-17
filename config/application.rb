@@ -17,6 +17,8 @@ module AnswerChecker
     config.i18n.default_locale = :ja
     config.i18n.available_locales = [:en, :ja]
 
+    config.exceptions_app = self.routes
+
     config.generators do |g|
       g.assets false
       g.helper false

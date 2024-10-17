@@ -1,31 +1,26 @@
-<h1>Users</h1>
+<div class="container">
+  <h1 class="my-4"><%= t('views.users.index.title') %></h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Email</th>
-      <th>Password digest</th>
-      <th>Is admin</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @users.each do |user| %>
+  <table class="table table-striped table-bordered">
+    <thead class="thead-dark">
       <tr>
-        <td><%= user.name %></td>
-        <td><%= user.email %></td>
-        <td><%= user.password_digest %></td>
-        <td><%= user.is_admin %></td>
-        <td><%= link_to 'Show', user %></td>
-        <td><%= link_to 'Edit', edit_user_path(user) %></td>
-        <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <th><%= t('activerecord.attributes.user.name') %></th>
+        <th><%= t('activerecord.attributes.user.email') %></th>
+        <th><%= t('activerecord.attributes.user.admin') %></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New User', new_user_path %>
+    </thead>
+  
+    <tbody>
+      <% @users.each do |user| %>
+        <tr>
+          <td><%= user.name %></td>
+          <td><%= user.email %></td>
+          <td><%= user.is_admin? ? "あり" : "なし" %></td>
+          <td><%= link_to t('views.events.index.actions.show'), user, class: 'btn btn-primary btn-sm' %></td>
+          <td><%= link_to t('views.events.index.actions.edit'), edit_user_path(user), class: 'btn btn-secondary btn-sm' %></td>
+          <td><%= link_to t('views.events.index.actions.destroy'), user, method: :delete, data: { confirm: '本当に削除しますか?' }, class: 'btn btn-danger btn-sm' %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

@@ -1,5 +1,46 @@
-<h1>New User</h1>
+<div class="container">
+  <h1 class="mb-4">ユーザ登録ページ</h1>
 
-<%= render 'form', user: @user %>
+  <%= form_with(model: @user, url: users_path, local: true, class: "w-50 mx-auto") do |form| %>
+    <% if @user.errors.any? %>
+      <div id="error_explanation" class="alert alert-danger">
+        <h2><%= pluralize(@user.errors.count, "エラー") %>が発生しました:</h2>
+        <ul>
+           <% @user.errors.each do |attribute, message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
 
-<%= link_to 'Back', users_path %>
+    <div class="form-group">
+      <%= form.label :name, "名前" %>
+      <%= form.text_field :name, id: 'name', class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :email, "メールアドレス" %>
+      <%= form.text_field :email, type: 'text', id: 'email', class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :password, "パスワード" %>
+      <%= form.password_field :password, id: 'password', class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :password_confirmation, "パスワード（確認）" %>
+      <%= form.password_field :password_confirmation, id: 'password_confirmation', class: "form-control" %>
+    </div>
+
+    <div class="form-group form-check">
+      <%= form.check_box :is_admin, class: "form-check-input", id: 'admin' %>
+      <%= form.label :is_admin, "管理者権限", class: "form-check-label" %>
+    </div>
+
+    <div class="form-group">
+      <%= form.submit "登録する", id: 'create-user', class: "btn btn-primary" %>
+    </div>
+    <%= link_to "戻る", users_path, id: "back", class: "btn btn-secondary" %>
+  <% end %>
+</div>

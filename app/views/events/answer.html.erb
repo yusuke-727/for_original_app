@@ -1,26 +1,42 @@
-<h2>回答ページ</h2>
+<div class="container">
+  <h1 class="my-4"><%= t('views.events.answer_title') %></h1>
 
-<p>
-  <strong>タイトル:</strong> <%= @event.title %>
-</p>
+  <div class="card">
+    <div class="card-body">
+      <div class="mb-3">
+        <strong>タイトル:</strong>
+        <p class="form-control-plaintext"><%= @event.title %></p>
+      </div>
 
-<p>
-  <strong>予定日:</strong> <%= @event.scheduled_date.strftime("%Y/%m/%d %H:%M:%S") %>
-</p>
+      <div class="mb-3">
+        <strong>予定日:</strong>
+        <p class="form-control-plaintext"><%= @event.scheduled_date.strftime("%Y/%m/%d %H:%M:%S") %></p>
+      </div>
 
-<p>
-  <strong>ユーザ:</strong> <%= @user_event.user.name %>
-</p>
+      <div class="mb-3">
+        <strong>ユーザ:</strong>
+        <p class="form-control-plaintext"><%= @user_event.user.name %></p>
+      </div>
 
-<%= form_with(model: @user_event, url: submit_answer_event_path(@event), method: :patch, local: true) do |f| %>
-  <div class="field">
-    <%= f.label :answer, "回答" %><br>
-    <%= f.radio_button :answer, '参加' %> 参加<br>
-    <%= f.radio_button :answer, '不参加' %> 不参加<br>
+      <%= form_with(model: @user_event, url: submit_answer_event_path(@event), method: :patch, local: true) do |f| %>
+        <div class="form-group">
+          <%= f.label :answer, "回答", class: "form-label" %><br>
+          <div class="form-check">
+            <%= f.radio_button :answer, '参加', class: "form-check-input" %> 
+            <%= f.label :answer, "参加", value: '参加', class: "form-check-label" %>
+          </div>
+          <div class="form-check">
+            <%= f.radio_button :answer, '不参加', class: "form-check-input" %> 
+            <%= f.label :answer, "不参加", value: '不参加', class: "form-check-label" %>
+          </div>
+        </div>
+
+        <div class="actions mt-4">
+          <%= f.submit "更新する", id: 'update-answer', class: "btn btn-primary" %>
+          <%= link_to '戻る', event_path(@event), id: "back", class: "btn btn-secondary ml-2" %>
+        </div>
+      <% end %>
+    </div>
   </div>
+</div>
 
-  <div class="actions">
-    <%= f.submit "更新" %>
-    <%= link_to '戻る', event_path(@event) %>
-  </div>
-<% end %>
