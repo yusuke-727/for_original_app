@@ -1,3 +1,10 @@
-<h1>お探しのページは見つかりません。</h1>
-<p>申し訳ございません。指定されたページが存在しないか、移動された可能性があります。</p>
-<%= link_to 'ホームページへ戻る', root_path, class: 'btn btn-primary' %>
+<div class="container">
+  <h1>お探しのページは見つかりません。</h1>
+
+  <div class="error404">
+  <%= image_tag '404.png', width: "232", height: "208", alt: "404エラー画像" %>
+  </div>
+
+  <p>申し訳ございません。指定されたページが存在しないか、移動された可能性があります。</p>
+  <%= link_to 'ホームページへ戻る', root_path, class: 'btn btn-primary' %>
+</div>

@@ -1,3 +1,10 @@
-<h1>サーバー内部で何らかのエラーが発生しています。</h1>
-<p>申し訳ございません。内部エラーが発生しました。</p>
-<%= link_to 'ホームページへ戻る', root_path, class: 'btn btn-primary' %>
+<div class="container">
+  <h1>サーバー内部で何らかのエラーが発生しています。</h1>
+
+  <div class="error500">
+  <%= image_tag '500.png', width: "218", height: "167", alt: "500エラー画像" %>
+  </div>
+
+  <p>申し訳ございません。内部エラーが発生しました。</p>
+  <%= link_to 'ホームページへ戻る', root_path, class: 'btn btn-primary' %>
+</div>
