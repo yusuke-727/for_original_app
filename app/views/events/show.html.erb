@@ -35,9 +35,13 @@
         <tr>
           <td><%= user.name %></td>
           <td><%= user.event_users.find_by(event_id: @event.id)&.answer || "未回答" %></td>
-          <td>
-            <%= link_to '回答を変更する', answer_event_path(@event), method: :get, class: 'btn btn-primary btn-sm' %>
-          </td>
+          <% if current_user.id == user.id %>
+            <td>
+              <%= link_to '回答を変更する', answer_event_path(@event), method: :get, class: 'btn btn-primary btn-sm' %>
+            </td>
+          <% else %>
+            <td></td>
+          <% end %>
         </tr>
       <% end %>
     </tbody>

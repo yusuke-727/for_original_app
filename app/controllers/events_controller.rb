@@ -14,7 +14,6 @@ class EventsController < ApplicationController
   def new
     @event = Event.new
     @event.event_users.build
-    #イベントユーザの子供になるインスタンスを作る
   end
 
   def edit
@@ -23,11 +22,11 @@ class EventsController < ApplicationController
 
   def create
     @event = Event.new(event_params)
-    if @event.save
+    if @event.save!
       params[:event][:user_ids].reject(&:blank?).each do |user_id|
         @event.event_users.create!(user_id: user_id)
       end
-      redirect_to events_path, notice: "Event was successfully created."
+      redirect_to events_path, notice: "イベントが作成できました。"
     else
       render :new
     end
@@ -52,13 +51,12 @@ class EventsController < ApplicationController
   def destroy
     @event = Event.find(params[:id])
     @event.destroy
-    redirect_to events_path, notice: 'Event was successfully destroyed.'
+    redirect_to events_path, notice: 'イベントが削除されました。'
   end
 
   def answer
     @user_event = @event.event_users.find_by(user_id: current_user.id)
     @user = @user_event.user unless @user_event.nil?
-    debugger
   end
   
   def submit_answer
@@ -77,7 +75,7 @@ class EventsController < ApplicationController
   end
 
   def event_params
-    params.require(:event).permit(:title, :content, :scheduled_date, user_ids: [], event_users_attributes: [:event_id, :user_id, :answer, :created_at, :updated_at])
+    params.require(:event).permit(:title, :content, :scheduled_date, event_users_attributes: [:event_id, :user_id, :answer])
   end
   
   def answer_params

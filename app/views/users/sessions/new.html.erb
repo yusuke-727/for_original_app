@@ -1,31 +1,33 @@
-<h2><%= t('.sign_in') %></h2>
+<div class="container">
+<h2 class="mb-4"><%= t('.sign_in') %></h2>
 
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
+  <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: "form-horizontal" }) do |f| %>
+    <div class="form-group">
+      <%= f.label :email, class: "col-form-label" %>
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control", placeholder: 'sample@example.com' %>
+    </div>
 
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
-  </div>
+    <div class="form-group">
+      <%= f.label :password, class: "col-form-label" %>
+      <%= f.password_field :password, autocomplete: "current-password", class: "form-control", placeholder: 'password' %>
+    </div>
 
-  <% if devise_mapping.rememberable? %>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
+    <% if devise_mapping.rememberable? %>
+      <div class="form-group form-check">
+        <%= f.check_box :remember_me, class: "form-check-input" %>
+        <%= f.label :remember_me, class: "form-check-label" %>
+      </div>
+    <% end %>
+
+    <div class="form-group">
+      <%= f.submit t('.sign_in'), class: "btn btn-primary" %>
     </div>
   <% end %>
 
-  <div class="actions">
-    <%= f.submit t('.sign_in') %>
-  </div>
-<% end %>
-
-<h5 class="mt-5">ゲストログインはこちらから</h5>
-  <div class="col mb-3 mt-3">
+  <h5 class="mt-5">ゲストログインはこちらから</h5>
+    <div class="col mb-3 mt-3">
     <%= link_to "ゲストログイン（閲覧用）", users_guest_sign_in_path, class: "btn btn-secondary", method: :post %>
-  </div>
-  
-<%= render "users/shared/links" %>
+    </div>
+
+  <%= render "users/shared/links" %>
+</div>

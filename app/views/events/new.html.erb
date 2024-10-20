@@ -2,17 +2,6 @@
   <h1><%= t('views.events.new.title') %></h1>
 
   <%= form_with model: @event, local: true, class: "w-50 mx-auto" do |form| %>
-    <% if @event.errors.any? %>
-      <div id="error_explanation" class="alert alert-danger">
-        <h2><%= pluralize(@event.errors.count, "error") %> <%= t('errors.messages.prohibited_this', count: @event.errors.count) %>:</h2>
-        <ul>
-          <% @event.errors.each do |attribute, message| %>
-            <li><%= message %></li>
-          <% end %>
-        </ul>
-      </div>
-    <% end %>
-
     <div class="form-group">
       <%= form.label :title, t('views.events.new.form.title') %><br>
       <%= form.text_field :title, class: "form-control" %>
