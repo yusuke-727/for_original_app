@@ -22,7 +22,7 @@ class EventsController < ApplicationController
 
   def create
     @event = Event.new(event_params)
-    if @event.save!
+    if @event.save
       params[:event][:user_ids].reject(&:blank?).each do |user_id|
         @event.event_users.create!(user_id: user_id)
       end
@@ -41,7 +41,7 @@ class EventsController < ApplicationController
         @event.event_users.create!(user_id: user_id)
       end
   
-      redirect_to event_path(@event), notice: 'Event was successfully updated.'
+      redirect_to event_path(@event), notice: 'イベントが更新できました。'
     else
       render :edit
     end

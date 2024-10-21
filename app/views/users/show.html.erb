@@ -10,9 +10,6 @@
         <th><strong>メールアドレス:</strong> <%= @user.email %></th>
       </tr>
       <tr>
-        <th><strong>パスワード:</strong> <%= @user.password %></th>
-      </tr>
-      <tr>
         <th><strong>管理者権限:</strong> <%= @user.is_admin? ? 'あり' : 'なし' %></th>
       </tr>
     </thead>

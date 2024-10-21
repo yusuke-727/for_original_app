@@ -65,6 +65,8 @@ ja:
         password_confirmation: "パスワード（確認用）"
         admin: "管理者"
     errors:
+      messages:
+        record_invalid: "入力に不備があります。確認して再度送信してください。"
       models:
         event:
           attributes:
