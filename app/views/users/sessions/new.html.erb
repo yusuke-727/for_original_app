@@ -26,7 +26,11 @@
 
   <h5 class="mt-5">ゲストログインはこちらから</h5>
     <div class="col mb-3 mt-3">
-    <%= link_to "ゲストログイン（閲覧用）", users_guest_sign_in_path, class: "btn btn-secondary", method: :post %>
+      <%= link_to "ゲストログイン（一般閲覧用）", users_guest_sign_in_path, class: "btn btn-secondary", method: :post %>
+    </div>
+
+    <div class="col mb-3 mt-3">
+      <%= link_to "ゲストログイン（管理者閲覧用）", users_admin_guest_sign_in_path, class: "btn btn-secondary", method: :post %>
     </div>
 
   <%= render "users/shared/links" %>

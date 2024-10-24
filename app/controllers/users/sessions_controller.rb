@@ -24,6 +24,12 @@ class Users::SessionsController < Devise::SessionsController
     redirect_to events_path, notice: "ゲストユーザーとしてログインしました。"
   end
 
+  def admin_guest_sign_in
+    user = User.admin_guest
+    sign_in user
+    redirect_to events_path, notice: "ゲストユーザー(管理者)としてログインしました。"
+  end
+
   # protected
 
   # If you have extra params to permit, append them to the sanitizer.
