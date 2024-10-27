@@ -64,6 +64,7 @@ class EventsController < ApplicationController
     if @user_event.update(answer_params)
       redirect_to @event, notice: '回答が更新されました。'
     else
+      flash.now[:alert] = '回答を入力してください。'
       render :answer
     end
   end
@@ -79,7 +80,11 @@ class EventsController < ApplicationController
   end
   
   def answer_params
-    params.require(:event_user).permit(:answer)
+    params.require(:event_user).permit(:answer).tap do |whitelisted|
+      whitelisted[:answer] = params[:event_user][:answer].presence || '未回答'
+    end
+  rescue ActionController::ParameterMissing
+    { answer: '未回答' }
   end
 
   def admin_check
